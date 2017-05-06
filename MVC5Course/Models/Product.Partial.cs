@@ -20,7 +20,7 @@ namespace MVC5Course.Models
         public string ProductName { get; set; }
         [Required(ErrorMessage = "請輸入Price")]
         [Range(0, 9999999, ErrorMessage = "請輸入正確的數字")]
-        [DisplayFormat(DataFormatString ="{0:0}")]
+        [DisplayFormat(ApplyFormatInEditMode =true,DataFormatString ="{0:0}")]
         public Nullable<decimal> Price { get; set; }
         [Required(ErrorMessage = "請選擇Active")]
         public Nullable<bool> Active { get; set; }
