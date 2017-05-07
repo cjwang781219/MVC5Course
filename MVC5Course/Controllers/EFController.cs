@@ -15,7 +15,7 @@ namespace MVC5Course.Controllers
         public ActionResult Index()
         {
             var all = db.Product.AsQueryable();
-            var data = db.Product.Where(p => p.Active == true && p.ProductName.Contains("Black"));
+            var data = db.Product.Where(p => p.Active == true).OrderByDescending(p=>p.ProductId).Take(20);
             return View(data);
         }
 
@@ -59,10 +59,23 @@ namespace MVC5Course.Controllers
 
         public ActionResult Delete(int id)
         {
-            var item = db.Product.Find(id);
-            db.Product.Remove(item);
+            var prodect = db.Product.Find(id);
+
+            //foreach (var item in prodect.OrderLine)
+            //{
+            //    db.OrderLine.Remove(item);
+            //}
+            db.OrderLine.RemoveRange(prodect.OrderLine);
+
+            db.Product.Remove(prodect);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Detail(int id)
+        {
+            var Prodect = db.Product.Find(id);
+            return View(Prodect);
         }
     }
 }
