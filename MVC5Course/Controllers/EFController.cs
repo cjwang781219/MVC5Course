@@ -32,8 +32,9 @@ namespace MVC5Course.Controllers
             {
                 db.Product.Add(prodect);
                 db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View(prodect);
         }
 
         public ActionResult Edit(int id)

@@ -1,5 +1,6 @@
 namespace MVC5Course.Models
 {
+    using Attirbute;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -25,7 +26,9 @@ namespace MVC5Course.Models
         //[MinLength(3), MaxLength(30)]
         //[RegularExpression(".+-.+", ErrorMessage = "商品名稱格式錯誤")]
         [DisplayName("商品名稱")]
+        [ProductName(ErrorMessage ="要有b 字元")]
         public string ProductName { get; set; }
+
         [Required(ErrorMessage = "請輸入Price")]
         [Range(0, 9999999, ErrorMessage = "請輸入正確的數字")]
         [DisplayName("商品價格")]
