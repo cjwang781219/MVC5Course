@@ -8,12 +8,21 @@ namespace MVC5Course.Models
     using System.Linq;
 
     [MetadataType(typeof(ProductMetaData))]
-    public partial class Product
+    public partial class Product :IValidatableObject
     {
         public int 訂單數量 {
             get {
                 return this.OrderLine.Count();
             }
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (this.Price > 100)
+            {
+                yield return new ValidationResult("price 不可大於100",new string[] { "Price"});
+            }
+            yield break;
         }
     }
     
