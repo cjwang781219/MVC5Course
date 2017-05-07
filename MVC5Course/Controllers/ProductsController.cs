@@ -139,5 +139,22 @@ namespace MVC5Course.Controllers
 
             return View(data);
         }
+
+        public ActionResult CreateProtect()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateProtect(ProdectLiteVM data)
+        {
+            if(ModelState.IsValid)
+            {
+                //
+                return RedirectToAction("ListProdects");
+            }
+            //驗證失敗 繼續顯示原頁面
+            return View();
+        }
     }
 }
