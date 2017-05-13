@@ -36,6 +36,11 @@ namespace MVC5Course.Controllers
             return View("About");
         }
 
+        public ActionResult ContentAction()
+        {
+            return PartialView("SuccessReduirect", "/");
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
@@ -46,6 +51,11 @@ namespace MVC5Course.Controllers
         public ActionResult Test()
         {
             return View();
+        }
+
+        public ActionResult getFile()
+        {
+            return File(Server.MapPath("~/Content/news.png"), "image/png","newsPicture.png");
         }
     }
 }
