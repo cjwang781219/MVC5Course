@@ -25,6 +25,17 @@ namespace MVC5Course.Controllers
             return View();
         }
 
+        public ActionResult PartialAbout()
+        {
+            if (Request.IsAjaxRequest())
+            {
+                //模擬AJAX
+                //$.get('/Home/PartialAbout',function(data){ alert(data) });
+                return PartialView("About");
+            }
+            return View("About");
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
