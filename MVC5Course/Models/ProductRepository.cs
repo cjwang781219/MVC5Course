@@ -53,6 +53,11 @@ namespace MVC5Course.Models
                 }).Take(10);
             return data;
         }
+        public override void Delete(Product entity)
+        {
+            entity.Is§R°£ = true;
+            //this.UnitOfWork.Context.Entry(entity).State = EntityState.Modified;
+        }
     }
 
 	public  interface IProductRepository : IRepository<Product>
