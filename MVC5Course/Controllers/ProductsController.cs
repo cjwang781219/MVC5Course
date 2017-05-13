@@ -146,6 +146,9 @@ namespace MVC5Course.Controllers
             //        Price = x.Price,
             //        Stock = x.Stock
             //    }).Take(10);
+            ViewBag.test1 = "test1";
+            ViewData["test2"] = "test2";
+            
             var data = repo.getProductList();
 
             return View(data);
@@ -161,7 +164,8 @@ namespace MVC5Course.Controllers
         {
             if(ModelState.IsValid)
             {
-                //
+                TempData["successMsg"] = "新增成功";
+                
                 return RedirectToAction("ListProdects");
             }
             //驗證失敗 繼續顯示原頁面

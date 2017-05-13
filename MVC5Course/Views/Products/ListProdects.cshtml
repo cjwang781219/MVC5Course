@@ -5,7 +5,12 @@
 }
 
 <h2>ListProdects</h2>
-
+<h1>@ViewBag.test1</h1>
+<h1>@ViewData["test2"]</h1>
+@if (TempData["successMsg"] != null)
+{
+    <h1>@TempData["successMsg"]</h1>
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
