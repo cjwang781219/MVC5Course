@@ -57,5 +57,14 @@ namespace MVC5Course.Controllers
         {
             return File(Server.MapPath("~/Content/news.png"), "image/png","newsPicture.png");
         }
+
+        public ActionResult getJSON()
+        {
+            //關閉延遲載入不然會錯
+            db.Configuration.LazyLoadingEnabled = false;
+            //模擬jquery get json
+            // $.get('Home/getJSON',function(data){console.log(data)});
+            return Json(db.Product.Take(3),JsonRequestBehavior.AllowGet);
+        }
     }
 }
