@@ -16,5 +16,11 @@ namespace MVC5Course.Controllers
         {
             return Content("Debug");
         }
+
+        //找不到action時 所做的特定處理，一般不建議做
+        //protected override void HandleUnknownAction(string actionName)
+        //{
+        //    RedirectToAction("Index","Home").ExecuteResult(ControllerContext);
+        //}
     }
 }
