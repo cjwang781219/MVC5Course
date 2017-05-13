@@ -137,7 +137,7 @@ namespace MVC5Course.Controllers
         //    base.Dispose(disposing);
         //}
 
-        public ActionResult ListProdects()
+        public ActionResult ListProdects(string q)
         {
             //var data = db.Product.Where(p => p.Active == true).OrderByDescending(p => p.ProductId)
             //    .Select(x => new ProdectLiteVM() {
@@ -148,8 +148,25 @@ namespace MVC5Course.Controllers
             //    }).Take(10);
             ViewBag.test1 = "test1";
             ViewData["test2"] = "test2";
-            
-            var data = repo.getProductList();
+
+            if (!string.IsNullOrEmpty(q))
+            {
+
+            }
+
+            var data = repo.All().Where(p => p.Active == true).OrderByDescending(p => p.ProductId)
+                .Select(x => new ProdectLiteVM()
+                {
+                    ProductId = x.ProductId,
+                    ProductName = x.ProductName,
+                    Price = x.Price,
+                    Stock = x.Stock
+                }).Take(10);
+            if (!string.IsNullOrEmpty(q))
+            {
+                data = data.Where(x=>x.ProductName.Contains(q));
+            }
+            //var data = repo.getProductList();
 
             return View(data);
         }
