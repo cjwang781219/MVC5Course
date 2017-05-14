@@ -99,7 +99,8 @@ namespace MVC5Course.Controllers
             //    return RedirectToAction("Index");
             //}
             var product = repo.getProductByID(id);
-            if (TryUpdateModel(product))
+            //只針對特定欄位做modl binding
+            if (TryUpdateModel(product,new string[] { "ProductId", "ProductName", "Price", "Active", "Stock" }))
             {
                 repo.UnitOfWork.Commit();
                 return RedirectToAction("Index");
