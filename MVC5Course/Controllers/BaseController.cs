@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
+    [HandleError(ExceptionType = typeof(DbEntityValidationException), View = "Error_DbEntityValidationException")]
     public abstract class BaseController : Controller
     {
         protected FabricsEntities db = new FabricsEntities();

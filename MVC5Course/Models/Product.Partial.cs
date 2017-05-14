@@ -18,9 +18,9 @@ namespace MVC5Course.Models
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (this.Price > 100)
+            if (this.Price > 1000)
             {
-                yield return new ValidationResult("price 不可大於100",new string[] { "Price"});
+                yield return new ValidationResult("price 不可大於1000",new string[] { "Price"});
             }
             yield break;
         }

@@ -10,6 +10,7 @@ using MVC5Course.Models;
 using MVC5Course.Models.ViewModels;
 using MVC5Course.Models.QueryModel;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace MVC5Course.Controllers
 {
@@ -56,7 +57,17 @@ namespace MVC5Course.Controllers
         [HandleError(ExceptionType = typeof(DbUpdateException),View = "Error_DbUpdateException")]
         public ActionResult Create([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
         {
-            if (ModelState.IsValid)
+            //if (ModelState.IsValid)
+            //{
+            //    repo.Add(product);
+            //    repo.UnitOfWork.Commit();
+            //    //db.Product.Add(product);
+            //    //db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            
+            //模擬錯誤訊息
+            //if (ModelState.IsValid)
             {
                 repo.Add(product);
                 repo.UnitOfWork.Commit();
@@ -64,6 +75,7 @@ namespace MVC5Course.Controllers
                 //db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
 
             return View(product);
         }
