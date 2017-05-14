@@ -17,7 +17,7 @@ namespace MVC5Course.Controllers
         {
             return View();
         }
-
+        
         //[SharedViewBag]
         [SharedViewBag(MyProperty ="Test Hello world")]
         public ActionResult About()
