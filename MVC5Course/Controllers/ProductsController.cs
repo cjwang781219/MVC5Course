@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using MVC5Course.Models;
 using MVC5Course.Models.ViewModels;
+using MVC5Course.Models.QueryModel;
 
 namespace MVC5Course.Controllers
 {
@@ -86,14 +87,21 @@ namespace MVC5Course.Controllers
         // 詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product)
+        public ActionResult Edit(int id,FormCollection formcollects)
         {
-            if (ModelState.IsValid)
+            //[Bind(Include = "ProductId,ProductName,Price,Active,Stock")] Product product
+            //if (ModelState.IsValid)
+            //{
+            //    repo.Edit(product);
+            //    repo.UnitOfWork.Commit();
+            //    //db.Entry(product).State = EntityState.Modified;
+            //    //db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            var product = repo.getProductByID(id);
+            if (TryUpdateModel(product))
             {
-                repo.Edit(product);
                 repo.UnitOfWork.Commit();
-                //db.Entry(product).State = EntityState.Modified;
-                //db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(product);
@@ -137,7 +145,7 @@ namespace MVC5Course.Controllers
         //    base.Dispose(disposing);
         //}
 
-        public ActionResult ListProdects(string q)
+        public ActionResult ListProdects(ListProdectsQM qm)
         {
             //var data = db.Product.Where(p => p.Active == true).OrderByDescending(p => p.ProductId)
             //    .Select(x => new ProdectLiteVM() {
@@ -148,29 +156,27 @@ namespace MVC5Course.Controllers
             //    }).Take(10);
             ViewBag.test1 = "test1";
             ViewData["test2"] = "test2";
-
-            if (!string.IsNullOrEmpty(q))
+            var data2 = repo.getProductList();
+            if (ModelState.IsValid)
             {
-
-            }
-
-            var data = repo.All().Where(p => p.Active == true).OrderByDescending(p => p.ProductId)
-                .Select(x => new ProdectLiteVM()
+                if (!string.IsNullOrEmpty(qm.q))
                 {
-                    ProductId = x.ProductId,
-                    ProductName = x.ProductName,
-                    Price = x.Price,
-                    Stock = x.Stock
-                }).Take(10);
-            if (!string.IsNullOrEmpty(q))
-            {
-                data = data.Where(x=>x.ProductName.Contains(q));
+                    data2 = data2.Where(x => x.ProductName.Contains(qm.q));
+                }
+                data2 = data2.Where(x => x.Stock >= qm.Stock_s && x.Stock <= qm.Stock_e);
+                //var data = repo.getProductList();
+                
             }
-            //var data = repo.getProductList();
-
+            var data = data2.Select(x => new ProdectLiteVM()
+            {
+                ProductId = x.ProductId,
+                ProductName = x.ProductName,
+                Price = x.Price,
+                Stock = x.Stock
+            }).Take(10);
             return View(data);
         }
-
+        
         public ActionResult CreateProtect()
         {
             return View();
