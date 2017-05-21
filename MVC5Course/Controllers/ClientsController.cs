@@ -95,6 +95,9 @@ namespace MVC5Course.Controllers
             {
                 return HttpNotFound();
             }
+            var items = new double[] { 1,2,3,4,5,6,7,8,9};
+            ViewBag.CreditRating = new SelectList(items, client.CreditRating);
+
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
@@ -112,6 +115,8 @@ namespace MVC5Course.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            var items = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            ViewBag.CreditRating = new SelectList(items,client.CreditRating);
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
