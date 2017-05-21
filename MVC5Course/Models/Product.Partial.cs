@@ -51,6 +51,9 @@ namespace MVC5Course.Models
         //[Range(0, 100, ErrorMessage = "請輸入0-100")]
         public Nullable<decimal> Stock { get; set; }
 
+        //DateType屬性必須搭配DisplayFormat使用
+        //且FormatString 格式必須為{0:yyyy-MM-dd}
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]
         public DateTime CreateDate { get; set; }
 
